@@ -37,3 +37,6 @@ Typology.create!( name:  "Aquaponie", subtypology_id: autre_au.id)
 Typology.create!( name:  "Abeilles", subtypology_id: autre_au.id)
 Typology.create!( name:  "Algues", subtypology_id: autre_au.id)
 Typology.create!( name:  "Ferme urbaine", subtypology_id: autre_au.id)
+
+#Statuses
+Status.create!( name: "Actif")
