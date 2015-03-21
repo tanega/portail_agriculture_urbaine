@@ -41,4 +41,18 @@ Typology.create!( name:  "Algues", subtypology_id: autre_au.id)
 Typology.create!( name:  "Ferme urbaine", subtypology_id: autre_au.id)
 
 #Statuses
-Status.create!( name: "Actif")
+Status.create!( name: "En cours de lancement")
+Status.create!( name: "En action")
+Status.create!( name: "Terminé")
+Status.create!( name: "En recherche de repreneur")
+Status.create!( name: "En recherche de nouveaux adhérents")
+Status.create!( name: "Action(s) ponctuelle(s)")
+
+#Collective Types
+CollectiveType.create!( name: "Collectivité Territoriale")
+CollectiveType.create!( name: "Association")
+CollectiveType.create!( name: "Collectif")
+CollectiveType.create!( name: "Individu")
+CollectiveType.create!( name: "Entreprise")
+CollectiveType.create!( name: "Chantier d'Insertion")
+CollectiveType.create!( name: "Coopérative")
