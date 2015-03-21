@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321165620) do
+ActiveRecord::Schema.define(version: 20150321173111) do
 
   create_table "collective_types", force: :cascade do |t|
     t.string   "name"
@@ -44,6 +44,23 @@ ActiveRecord::Schema.define(version: 20150321165620) do
   end
 
   add_index "contacts", ["name"], name: "index_contacts_on_name", unique: true
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "typology_id"
+    t.integer  "project_owner_id"
+    t.integer  "collective_id"
+    t.string   "land_owner"
+    t.datetime "creation_date"
+    t.integer  "status_id"
+    t.datetime "status_date"
+    t.text     "how_to_participate"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
 
   create_table "statuses", force: :cascade do |t|
     t.string   "name"

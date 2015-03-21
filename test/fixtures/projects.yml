@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  latitude: 1.5
+  longitude: 1.5
+  typology_id: 1
+  project_owner_id: 1
+  collective_id: 1
+  land_owner: MyString
+  creation_date: 2015-03-21 18:31:11
+  status_id: 1
+  status_date: 2015-03-21 18:31:11
+  how_to_participate: MyText
+
+two:
+  name: MyString
+  description: MyText
+  latitude: 1.5
+  longitude: 1.5
+  typology_id: 1
+  project_owner_id: 1
+  collective_id: 1
+  land_owner: MyString
+  creation_date: 2015-03-21 18:31:11
+  status_id: 1
+  status_date: 2015-03-21 18:31:11
+  how_to_participate: MyText
