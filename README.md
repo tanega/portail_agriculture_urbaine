@@ -1,2 +1,3 @@
-# portail_agriculture_urbaine
-Cartographie des projets d'agriculture urbaine
+# Portail Agriculture Urbaine
+
+Projet réalisé durant l'évènement Hackgriculture.
