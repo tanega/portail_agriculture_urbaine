@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TagTest < ActiveSupport::TestCase
   def setup
-    @tag = Tag.new(name:"Le Français")
+    @tag = Tag.new(name:"Test")
   end
 
   test "should be valid" do
