@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321154124) do
+ActiveRecord::Schema.define(version: 20150321154626) do
 
   create_table "sub_typologies", force: :cascade do |t|
     t.string   "name"
@@ -28,5 +28,14 @@ ActiveRecord::Schema.define(version: 20150321154124) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true
+
+  create_table "typologies", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "subtypology_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "typologies", ["name"], name: "index_typologies_on_name", unique: true
 
 end
