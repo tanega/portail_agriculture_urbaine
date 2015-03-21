@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321160944) do
+ActiveRecord::Schema.define(version: 20150321161534) do
+
+  create_table "collective_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "collective_types", ["name"], name: "index_collective_types_on_name", unique: true
 
   create_table "statuses", force: :cascade do |t|
     t.string   "name"
