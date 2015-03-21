@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  phone: MyString
+  email: coucou@coucou.fr
+  collective_type_id: 1
+  website: MyString
+
+two:
+  name: MyString2
+  phone: MyString
+  email: coucou@coucou.com
+  collective_type_id: 1
+  website: MyString

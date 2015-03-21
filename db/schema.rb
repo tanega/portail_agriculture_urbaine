@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321161534) do
+ActiveRecord::Schema.define(version: 20150321163810) do
 
   create_table "collective_types", force: :cascade do |t|
     t.string   "name"
@@ -20,6 +20,19 @@ ActiveRecord::Schema.define(version: 20150321161534) do
   end
 
   add_index "collective_types", ["name"], name: "index_collective_types_on_name", unique: true
+
+  create_table "collectives", force: :cascade do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.string   "email"
+    t.integer  "collective_type_id"
+    t.string   "website"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "collectives", ["collective_type_id"], name: "index_collectives_on_collective_type_id"
+  add_index "collectives", ["name"], name: "index_collectives_on_name", unique: true
 
   create_table "statuses", force: :cascade do |t|
     t.string   "name"
