@@ -31,6 +31,8 @@ Typology.create!( name:  "Prêt de jardin", subtypology_id: jardins.id)
 Typology.create!( name:  "Jardin collectif", subtypology_id: jardins.id)
 Typology.create!( name:  "Jardin de la biodiversité", subtypology_id: jardins.id)
 Typology.create!( name:  "Verger", subtypology_id: jardins.id)
+Typology.create!( name:  "Jardins d'entreprise", subtypology_id: jardins.id)
+Typology.create!( name:  "Jardins familiaux", subtypology_id: jardins.id)
 
 Typology.create!( name:  "Poulailler", subtypology_id: autre_au.id)
 Typology.create!( name:  "Aquaponie", subtypology_id: autre_au.id)
