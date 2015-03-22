@@ -9,12 +9,12 @@ class TagRelationTest < ActiveSupport::TestCase
     assert @relation.valid?
   end
 
-  test "name should be present" do
+  test "project_id should be present" do
     @relation.project_id = nil
     assert_not @relation.valid?
   end
 
-  test "subtypology_id should be present" do
+  test "tag_id should be present" do
     @relation.tag_id = nil
     assert_not @relation.valid?
   end
