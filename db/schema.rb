@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321173111) do
+ActiveRecord::Schema.define(version: 20150322083255) do
 
   create_table "collective_types", force: :cascade do |t|
     t.string   "name"
@@ -77,6 +77,17 @@ ActiveRecord::Schema.define(version: 20150321173111) do
   end
 
   add_index "sub_typologies", ["name"], name: "index_sub_typologies_on_name", unique: true
+
+  create_table "tag_relations", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tag_relations", ["project_id", "tag_id"], name: "index_tag_relations_on_project_id_and_tag_id", unique: true
+  add_index "tag_relations", ["project_id"], name: "index_tag_relations_on_project_id"
+  add_index "tag_relations", ["tag_id"], name: "index_tag_relations_on_tag_id"
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
