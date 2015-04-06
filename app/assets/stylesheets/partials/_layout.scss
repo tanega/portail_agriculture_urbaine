@@ -1,0 +1,30 @@
+body {
+  background-color: white;
+
+  @include media($tablet) {
+    background-color: light-gray;
+  }
+
+  @include media($desktop) {
+    background-color: gray;
+  } 
+};
+
+.grid-row {
+  @include outer-container;
+
+  .grid-cell {
+    @include span-columns(12);
+    @include media($tablet) {
+      @include span-columns(6);
+    }
+
+    @include media($desktop) {
+      @include span-columns(6);
+    }
+  }
+
+  .grid-single-cell {
+    @include span-columns(12);
+  }
+}

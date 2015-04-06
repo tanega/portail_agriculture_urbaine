@@ -15,6 +15,10 @@ gem 'neat'
 gem 'bitters'
 gem 'refills'
 
+group :development do
+  gem 'guard-livereload', '~> 2.4', require: false
+end
+
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
   gem 'byebug',      '3.4.0'
