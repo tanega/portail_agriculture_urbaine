@@ -1,17 +1,7 @@
 Rails.application.routes.draw do
-  get 'projects/index'
 
-  get 'projects/show'
+  root 'static_pages#home'
 
-  get 'projects/new'
+  resources :projects
 
-  get 'projects/edit'
-
-  get 'projects/create'
-
-  get 'projects/update'
-
-  get 'projects/destroy'
-
-  root                         'static_pages#home'
 end

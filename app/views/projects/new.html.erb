@@ -1,2 +1,20 @@
-<h1>Projects#new</h1>
-<p>Find me in app/views/projects/new.html.erb</p>
+<div class="hero" >
+	<div class="hero-inner">
+    <a href="" class="hero-logo"><img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png
+" alt="Logo Image"></a>
+		<div class="hero-copy">
+			<h1>Nouveau projet</h1>
+			<p>Faire connaître votre projet en détails!</p>	
+		</div>
+	</div>
+</div>
+
+<%= render 'form' %>
+
+
+<%= link_to "Liste des projets", projects_path %>
+
+<script type='text/javascript'>
+	L.mapbox.accessToken = 'pk.eyJ1IjoicGxhbnRlLWV0LWNpdGUiLCJhIjoiV1NlYTVsbyJ9.RToSTFei8BJGSEkKk2EImw';
+	L.mapbox.map('map-one', 'plante-et-cite.2c752022');
+</script>

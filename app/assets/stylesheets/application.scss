@@ -1,6 +1,13 @@
+$max-width: 1200px;
+
 @import "bourbon";
 @import "base/base";
 @import "neat";
 
 @import "partials/responsive";
 @import "partials/layout";
+
+
+// @import "partials/mapbox";
+
+@import "projects";
