@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322083926) do
+ActiveRecord::Schema.define(version: 20150407161547) do
 
   create_table "collective_types", force: :cascade do |t|
     t.string   "name"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20150322083926) do
     t.integer  "subtypology_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "category"
   end
 
   add_index "typologies", ["name"], name: "index_typologies_on_name", unique: true

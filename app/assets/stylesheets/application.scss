@@ -7,7 +7,9 @@ $max-width: 1200px;
 @import "partials/responsive";
 @import "partials/layout";
 
+@import "select2";
 
-// @import "partials/mapbox";
+
+@import "partials/mapbox";
 
 @import "projects";

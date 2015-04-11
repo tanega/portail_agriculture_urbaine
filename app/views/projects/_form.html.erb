@@ -11,7 +11,7 @@
 	  <%= f.input :name %>
 	  <%= f.input :description %>
 	  <%= f.association :status %>
-	  <%= f.association :typologies %>
+	  <%= f.association :typology %>
 	  <div class="grid-row">
 	  	<div class="grid-cell">
 	  		<%= f.input :latitude, inline_label: 'Lat' %>
@@ -42,6 +42,31 @@
 
 	</div>
 </div>
+
+
+
+<!-- SELECT 2 - ARRAY -->
+<script>
+var data = [{
+    text     : "Header One",
+    children : [{
+        id   : 0,
+        text : "Item One"
+    }, { 
+        id   : 1,
+        text : "Item Two"
+    }]
+}];
+  $(document).ready(function() { 
+    $("#project_status_id").select2({
+      allowClear: true,
+      placeholder: "Sélectionner une valeur"
+    });
+    $("#project_typology_id").select2({
+      placeholder: "Sélectionner une valeur"
+    })
+  });
+</script>
 
 
 <!-- GOOGLE PLACES AUTOCOMPLETE -->
@@ -76,7 +101,7 @@
       position: myLatlng,
       map: map,
       draggable: true,
-      title: 'Cliquer pour zoomer sur <%= @project.title %>'
+      name: 'Cliquer pour zoomer sur <%= @project.name %>'
     });
     <% else  %>
       var project = new google.maps.Marker({

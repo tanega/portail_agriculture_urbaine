@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
   has_many :tag_relations, foreign_key: "project_id", dependent: :destroy
   has_many :tags, through: :tag_relations, source: :tag
   belongs_to :status
+  belongs_to :typology
   validates :name,  presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 250 }
   validates :how_to_participate, length: { maximum: 250 }
