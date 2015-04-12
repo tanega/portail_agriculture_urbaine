@@ -1,35 +1,39 @@
-<div class="hero" >
+<div class="hero" style="height:230px;">
 	<div class="hero-inner">
     <a href="" class="hero-logo"><img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png
 " alt="Logo Image"></a>
 		<div class="hero-copy">
 			<h1>Projets et ressources en agriculture urbaine</h1>
-			<p>Yo yo yo</p>	
 		</div>
+    <div class='rounded-toggle inline'>
+      <a class='active' href='#active1'>Carte des projets</a>
+      <a href='#active2'>Ajouter un projet</a>
+      <a href='#active3'>Autres</a>
+    </div>
 	</div>
 </div>
 
-<div class='grid'>
-  <div class='col12 pad2y clearfix'>
-    <div class='tabs col8 margin2 space-bottom'>
-        <a href='#active1' class='col4 active'>Jardins</a>
-        <a href='#active2' class='col4'>Ressources</a>
-        <a href='#active3' class='col4'>Autres</a>
-    </div>
-    <div class='clip sliding col12 v active1 fill-green dark center' style='height:100px;'>
-      <div class='col12 pad4 animate'>Jardins!</div>
-      <div class='col12 pad4 animate fill-darken1'>Ressources!</div>
-      <div class='col12 pad4 animate fill-darken2'>Autres!</div>
-    </div>
-  </div>
-  <div class='col12 clearfix'>
-    <nav class='col3 fill-darken1' style="height:400px;">
 
-    </nav>
-    <div id="map" class='col9' style="height:400px;" >
+<div class='col12 pad0y fill-gray'>
+  <div id="sliding-panel" class='clip sliding col12 h active1 fill-gray dark center' style='height:400px;'>
+    <div class='col12 animate'>
+        <nav class='col4' style="height:400px;">
+          <div class='radio-pill pill col12'>
+            <input type='radio' name='typology' id='jardin' checked='checked'>
+            <label for='jardin' class='col4 button icon check loud'>Jardin</label>
+            <input type='radio' name='typology' id='ressource'>
+            <label for='ressource' class='col4 button icon check'>Ressources</label>
+            <input type='radio' name='typology' id='autres'>
+            <label for='autres' class='col4 button icon check'>Autres projets</label>
+          </div>
+        </nav>
+        <div id="map" class='col custom-popup' style="height:400px;" ></div>
     </div>
+    <div class='col12 pad4 animate fill-darken1' style='height:400px;'>Waiting for ng-controller</div>
+    <div class='col12 pad4 animate fill-darken2' style='height:400px;'>Waiting for ideas</div>
   </div>
 </div>
+
 
 
 <!-- <div id="map" class='col12 pad4 contain fill-navy dark'>
@@ -82,22 +86,18 @@
   //       }
   //     ]
   //   };
-$( document ).ready(function() {
- $.ajax({
-    dataType: 'text',
-    url: '/projects.geojson',
-    success: function(data) {
-      var geojson;
-      geojson = data;
-      return geojson;
-    }
-  })
+
+
+$(document).ready(function() {
+  $.getJSON("projects.geojson", function(geojson) {
+    // Provide your access token
+    L.mapbox.accessToken = 'pk.eyJ1IjoicGxhbnRlLWV0LWNpdGUiLCJhIjoiV1NlYTVsbyJ9.RToSTFei8BJGSEkKk2EImw';
+    // Create a map in the div #map
+    L.mapbox.map('map', 'plante-et-cite.2c752022')
+        .setView([47.218, -1.553], 10)
+        .featureLayer.setGeoJSON(geojson);
+  });
 });
-  // Provide your access token
-  L.mapbox.accessToken = 'pk.eyJ1IjoicGxhbnRlLWV0LWNpdGUiLCJhIjoiV1NlYTVsbyJ9.RToSTFei8BJGSEkKk2EImw';
-  // Create a map in the div #map
-  L.mapbox.map('map', 'plante-et-cite.2c752022')
- 
 </script>
 
 <script>
@@ -105,6 +105,21 @@ $(function() {
     $('.tabs a').click(function() {
         var tabgroup = $(this).parent();
         var slidecontainer = tabgroup.next();
+        var tab = $(this).attr('href').split('#')[1];
+        $(this).addClass('active').siblings().removeClass('active');
+        var current = slidecontainer.attr('class').match(/active[0-9]+/);
+        if (current) slidecontainer.removeClass(current[0]);
+        slidecontainer.addClass(tab);
+        return false;
+    });
+});
+</script>
+
+<script>
+$(function() {
+    $('.rounded-toggle a').click(function() {
+        var tabgroup = $(this).parent();
+        var slidecontainer = $("#sliding-panel"); //changer ça!
         var tab = $(this).attr('href').split('#')[1];
         $(this).addClass('active').siblings().removeClass('active');
         var current = slidecontainer.attr('class').match(/active[0-9]+/);
