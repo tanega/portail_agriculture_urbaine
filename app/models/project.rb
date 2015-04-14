@@ -8,6 +8,7 @@ class Project < ActiveRecord::Base
   validates :name,  presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 250 }
   validates :how_to_participate, length: { maximum: 250 }
+  validates_presence_of :typology
 
   # Add a tag.
   def add_tag(tag)
@@ -39,4 +40,27 @@ class Project < ActiveRecord::Base
   def has_typology?(typology)
     typologies.include?(typology)
   end
+
+  #Set marker color
+  def set_marker_color
+    if self.typology.category == "Jardins"
+      return "#6D4C41"
+    elsif self.typology.category == "Ressources pour l'AU"
+      return "#CDDC39"
+    else 
+      return "#80CBC4"
+    end
+  end
+
+  #Set marker icons
+  def set_marker_icons
+    if self.typology.category == "Jardins"
+      return "star"
+    elsif self.typology.category == "Ressources pour l'AU"
+      return "garden"
+    else 
+      return "library"
+    end
+  end
+
 end

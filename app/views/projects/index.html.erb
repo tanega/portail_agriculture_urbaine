@@ -6,9 +6,9 @@
 			<h1>Projets et ressources en agriculture urbaine</h1>
 		</div>
     <div class='rounded-toggle inline'>
-      <a class='active' href='#active1'>Carte des projets</a>
-      <a href='#active2'>Ajouter un projet</a>
-      <a href='#active3'>Autres</a>
+      <%= link_to "Carte des projets", projects_path, :class => "active" %>
+      <%= link_to "Ajouter un projet", new_project_path %>
+      <a href='#active3'>Ajouter un collectif</a>
     </div>
 	</div>
 </div>
@@ -87,45 +87,56 @@
   //     ]
   //   };
 
-
-$(document).ready(function() {
-  $.getJSON("projects.geojson", function(geojson) {
-    // Provide your access token
-    L.mapbox.accessToken = 'pk.eyJ1IjoicGxhbnRlLWV0LWNpdGUiLCJhIjoiV1NlYTVsbyJ9.RToSTFei8BJGSEkKk2EImw';
-    // Create a map in the div #map
-    L.mapbox.map('map', 'plante-et-cite.2c752022')
-        .setView([47.218, -1.553], 10)
-        .featureLayer.setGeoJSON(geojson);
+var json = (function () {
+  var json = null;
+  $.ajax({
+      'async': false,
+      'global': false,
+      'url': 'projects.geojson',
+      'dataType': "json",
+      'success': function (data) {
+          json = data;
+      }
   });
-});
+  return json;
+})(); 
+
+// Provide your access token
+L.mapbox.accessToken = 'pk.eyJ1IjoicGxhbnRlLWV0LWNpdGUiLCJhIjoiV1NlYTVsbyJ9.RToSTFei8BJGSEkKk2EImw';
+// Create a map in the div #map
+var map = L.mapbox.map('map', 'plante-et-cite.2c752022')
+	.setView([47.218, -1.553], 10)
+	.featureLayer.setGeoJSON(json);
+	
+	
 </script>
 
-<script>
-$(function() {
-    $('.tabs a').click(function() {
-        var tabgroup = $(this).parent();
-        var slidecontainer = tabgroup.next();
-        var tab = $(this).attr('href').split('#')[1];
-        $(this).addClass('active').siblings().removeClass('active');
-        var current = slidecontainer.attr('class').match(/active[0-9]+/);
-        if (current) slidecontainer.removeClass(current[0]);
-        slidecontainer.addClass(tab);
-        return false;
-    });
-});
-</script>
+// <script>
+// $(function() {
+//     $('.tabs a').click(function() {
+//         var tabgroup = $(this).parent();
+//         var slidecontainer = tabgroup.next();
+//         var tab = $(this).attr('href').split('#')[1];
+//         $(this).addClass('active').siblings().removeClass('active');
+//         var current = slidecontainer.attr('class').match(/active[0-9]+/);
+//         if (current) slidecontainer.removeClass(current[0]);
+//         slidecontainer.addClass(tab);
+//         return false;
+//     });
+// });
+// </script>
 
 <script>
-$(function() {
-    $('.rounded-toggle a').click(function() {
-        var tabgroup = $(this).parent();
-        var slidecontainer = $("#sliding-panel"); //changer ça!
-        var tab = $(this).attr('href').split('#')[1];
-        $(this).addClass('active').siblings().removeClass('active');
-        var current = slidecontainer.attr('class').match(/active[0-9]+/);
-        if (current) slidecontainer.removeClass(current[0]);
-        slidecontainer.addClass(tab);
-        return false;
-    });
-});
+// $(function() {
+//     $('.rounded-toggle a').click(function() {
+//         var tabgroup = $(this).parent();
+//         var slidecontainer = $("#sliding-panel"); //changer ça!
+//         var tab = $(this).attr('href').split('#')[1];
+//         $(this).addClass('active').siblings().removeClass('active');
+//         var current = slidecontainer.attr('class').match(/active[0-9]+/);
+//         if (current) slidecontainer.removeClass(current[0]);
+//         slidecontainer.addClass(tab);
+//         return false;
+//     });
+// });
 </script>

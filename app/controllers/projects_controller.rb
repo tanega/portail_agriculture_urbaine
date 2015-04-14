@@ -14,10 +14,13 @@ class ProjectsController < ApplicationController
           coordinates: [project.longitude.to_f, project.latitude.to_f]
         },
         properties: {
-          :name => project.name,
+          :title => project.name,
           :description => project.description,
-          :'marker-color' => '#00607d',
-          :'marker-symbol' => 'circle',
+          :status => project.status.name,
+          :category => project.typology.category,
+          :typology => project.typology,
+          :'marker-color' => project.set_marker_color,
+          :'marker-symbol' => project.set_marker_icons,
           :'marker-size' => 'medium'
         }
       }
@@ -50,7 +53,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: "Le projet a été créé avec succès!" }
+        format.html { redirect_to @projects, notice: "Le projet a été créé avec succès!" }
       else
         format.html { render action: 'new' }
       end
@@ -60,7 +63,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
     if @project.update(project_params)
-      format.html { redirect_to @project, notice: "Le projet a bien été mis à jour." }
+      format.html { redirect_to @projects, notice: "Le projet a bien été mis à jour." }
     else
       format.html { render action: 'edit' }
     end
@@ -81,7 +84,7 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :description, :latitude, :longitude, :project_owner_id, :collective_id, :land_owner, :creation_date, :status_id, :status_date, :how_to_participate, :created_at, :updated_at, :typology_ids => [])
+      params.require(:project).permit(:name, :description, :latitude, :longitude, :project_owner_id, :collective_id, :land_owner, :creation_date, :status_id, :status_date, :typology_id, :how_to_participate, :created_at, :updated_at)
     end
 
 end

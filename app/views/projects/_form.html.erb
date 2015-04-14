@@ -11,7 +11,7 @@
 	  <%= f.input :name %>
 	  <%= f.input :description %>
 	  <%= f.association :status %>
-	  <%= f.association :typology %>
+	  <%= f.input(:typology_id, :collection => SubTypology.order(:name), :as => :grouped_select, :group_method => :typologies) %>
 	  <div class="grid-row">
 	  	<div class="grid-cell">
 	  		<%= f.input :latitude, inline_label: 'Lat' %>
@@ -60,9 +60,12 @@ var data = [{
   $(document).ready(function() { 
     $("#project_status_id").select2({
       allowClear: true,
+      width: '75%',
       placeholder: "Sélectionner une valeur"
     });
     $("#project_typology_id").select2({
+      allowClear: true,
+      width: '75%',
       placeholder: "Sélectionner une valeur"
     })
   });

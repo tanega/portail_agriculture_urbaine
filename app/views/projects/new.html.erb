@@ -1,11 +1,15 @@
 <div class="hero" >
 	<div class="hero-inner">
-    <a href="" class="hero-logo"><img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png
-" alt="Logo Image"></a>
+	    <a href="" class="hero-logo"><img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png
+	" alt="Logo Image"></a>
 		<div class="hero-copy">
 			<h1>Nouveau projet</h1>
-			<p>Faire connaître votre projet en détails!</p>	
 		</div>
+    <div class='rounded-toggle inline'>
+      <%= link_to "Carte des projets", projects_path %>
+      <%= link_to "Ajouter un projet", new_project_path, :class => "active" %>
+      <a href='#active3'>Ajouter un collectif</a>
+    </div>
 	</div>
 </div>
 
