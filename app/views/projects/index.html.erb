@@ -1,7 +1,5 @@
-<div class="hero" style="height:230px;">
+<div class="hero" style="height:180px;">
 	<div class="hero-inner">
-    <a href="" class="hero-logo"><img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png
-" alt="Logo Image"></a>
 		<div class="hero-copy">
 			<h1>Projets et ressources en agriculture urbaine</h1>
 		</div>
@@ -14,25 +12,23 @@
 </div>
 
 
-<div class='col12 pad0y fill-gray'>
-  <div id="sliding-panel" class='clip sliding col12 h active1 fill-gray dark center' style='height:400px;'>
-    <div class='col12 animate'>
-        <nav class='col4' style="height:400px;">
-          <div class='radio-pill pill col12'>
-            <input type='radio' name='typology' id='jardin' checked='checked'>
-            <label for='jardin' class='col4 button icon check loud'>Jardin</label>
-            <input type='radio' name='typology' id='ressource'>
-            <label for='ressource' class='col4 button icon check'>Ressources</label>
-            <input type='radio' name='typology' id='autres'>
-            <label for='autres' class='col4 button icon check'>Autres projets</label>
-          </div>
-        </nav>
-        <div id="map" class='col custom-popup' style="height:400px;" ></div>
-    </div>
-    <div class='col12 pad4 animate fill-darken1' style='height:400px;'>Waiting for ng-controller</div>
-    <div class='col12 pad4 animate fill-darken2' style='height:400px;'>Waiting for ideas</div>
-  </div>
-</div>
+
+	<div class='col3 center'>
+		<ul id='nav'>
+      <li ><a id="filter-all"style="font-weight: bold;" href="#">Tous les projets</a></li>
+		<% @categories.each do |category| %>	
+			<li><a id="filter-<%= category.name.parameterize %>"style="font-weight: bold;" href="#"><%= category.name %></a>
+				<ul>
+				<% category.typologies.each do |typology| %>
+					<li><a href="#"><%= typology.name %></a></li>
+				<% end %>
+				</ul>
+			</li>
+		<% end %>
+		</ul>	
+	</div>
+	<div id="map" class='col6 custom-popup' style="height:500px;" ></div>
+	<div id="project-description" class='col3' style="height:400px;"></div>
 
 
 
@@ -87,31 +83,113 @@
   //     ]
   //   };
 
-var json = (function () {
-  var json = null;
-  $.ajax({
-      'async': false,
-      'global': false,
-      'url': 'projects.geojson',
-      'dataType': "json",
-      'success': function (data) {
-          json = data;
-      }
-  });
-  return json;
-})(); 
+// var json = (function () {
+//   var json = null;
+//   $.ajax({
+//       'async': false,
+//       'global': false,
+//       'url': 'projects.geojson',
+//       'dataType': "json",
+//       'success': function (data) {
+//           json = data;
+//       }
+//   });
+//   return json;
+// })(); 
 
 // Provide your access token
 L.mapbox.accessToken = 'pk.eyJ1IjoicGxhbnRlLWV0LWNpdGUiLCJhIjoiV1NlYTVsbyJ9.RToSTFei8BJGSEkKk2EImw';
 // Create a map in the div #map
 var map = L.mapbox.map('map', 'plante-et-cite.2c752022')
-	.setView([47.218, -1.553], 10)
-	.featureLayer.setGeoJSON(json);
-	
-	
+	.setView([47.218, -1.553], 10);
+
+var features = L.mapbox.featureLayer()
+      .loadURL('projects.geojson')
+      .addTo(map);
+
+var all = document.getElementById('filter-all');
+var	garden = document.getElementById('filter-jardins');
+var	ressource = document.getElementById('filter-ressource-pour-l-au');
+var	other = document.getElementById('filter-autre-projets-d-au');
+
+all.onclick = function(e) {
+    // The setFilter function takes a GeoJSON feature object
+    // and returns true to show it or false to hide it.
+    features.setFilter(function(f) {
+        return true;
+    });
+    return false;
+};
+
+garden.onclick = function(e) {
+    // The setFilter function takes a GeoJSON feature object
+    // and returns true to show it or false to hide it.
+    features.setFilter(function(f) {
+        return f.properties['category'] === "Jardins";
+    });
+    return false;
+};
+
+ressource.onclick = function(e) {
+    // The setFilter function takes a GeoJSON feature object
+    // and returns true to show it or false to hide it.
+    features.setFilter(function(f) {
+        return f.properties['category'] === "Ressource pour l'AU";
+    });
+    return false;
+};
+
+other.onclick = function(e) {
+    // The setFilter function takes a GeoJSON feature object
+    // and returns true to show it or false to hide it.
+    features.setFilter(function(f) {
+        return f.properties['category'] === "Autres projets d'AU";
+    });
+    return false;
+};
+
+var description = document.getElementById('project-description');
+
+
+// Listen for individual marker clicks.
+features.on('click',function(e) {
+    // Force the popup closed.
+    e.layer.closePopup();
+
+    var feature = e.layer.feature;
+    var content = '<div><strong>' + feature.properties.title + '</strong>' +
+                  '<p>' + feature.properties.description + '</p></div>';
+
+    description.innerHTML = content;
+});
+
+// Clear the tooltip when map is clicked.
+map.on('move', empty);
+
+// Trigger empty contents when the script
+// has loaded on the page.
+empty();
+
+function empty() {
+  description.innerHTML = '<div><strong>Click a marker</strong></div>';
+  }
+
 </script>
 
-// <script>
+<script>
+		$(document).ready(function () {
+		  $('#nav > li > a').click(function(){
+		    if ($(this).attr('class') != 'active'){
+		      $('#nav li ul').slideUp();
+		      $(this).next().slideToggle();
+		      $('#nav li a').removeClass('active');
+		      $(this).addClass('active');
+		    }
+		  });
+		});
+</script>
+
+<script>
 // $(function() {
 //     $('.tabs a').click(function() {
 //         var tabgroup = $(this).parent();
@@ -124,7 +202,7 @@ var map = L.mapbox.map('map', 'plante-et-cite.2c752022')
 //         return false;
 //     });
 // });
-// </script>
+</script>
 
 <script>
 // $(function() {

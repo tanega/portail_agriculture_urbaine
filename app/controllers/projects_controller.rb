@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
     @features = Array.new
+    @categories = SubTypology.all
 
     @projects.each do |project|
       @features << {
@@ -53,7 +54,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @projects, notice: "Le projet a été créé avec succès!" }
+        format.html { redirect_to projects_url, notice: "Le projet a été créé avec succès!" }
       else
         format.html { render action: 'new' }
       end
@@ -63,7 +64,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
     if @project.update(project_params)
-      format.html { redirect_to @projects, notice: "Le projet a bien été mis à jour." }
+      format.html { redirect_to projects_url, notice: "Le projet a bien été mis à jour." }
     else
       format.html { render action: 'edit' }
     end

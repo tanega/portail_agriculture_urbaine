@@ -44,9 +44,9 @@ class Project < ActiveRecord::Base
   #Set marker color
   def set_marker_color
     if self.typology.category == "Jardins"
-      return "#6D4C41"
+      return "#CDDC39" 
     elsif self.typology.category == "Ressources pour l'AU"
-      return "#CDDC39"
+      return "#6D4C41"
     else 
       return "#80CBC4"
     end
@@ -55,9 +55,9 @@ class Project < ActiveRecord::Base
   #Set marker icons
   def set_marker_icons
     if self.typology.category == "Jardins"
-      return "star"
-    elsif self.typology.category == "Ressources pour l'AU"
       return "garden"
+    elsif self.typology.category == "Ressources pour l'AU"
+      return "star"
     else 
       return "library"
     end
